@@ -6,7 +6,7 @@ import * as authorActions from './../../actions/authorsActions';
 import CourseForm from '../course/CourseForm';
 import toastr from 'toastr';
 
-class ManageCoursePage  extends React.Component{
+export class ManageCoursePage  extends React.Component{
     constructor(props,context){
         super(props,context);
     this.state ={
@@ -24,6 +24,18 @@ class ManageCoursePage  extends React.Component{
       this.setState({course: Object.assign({}, nextProps.course)});
     }
   }
+ courseFormIsValid() {
+    let formIsValid = true;
+    let errors = {};
+
+    if (this.state.course.title.length < 5) {
+      errors.title = 'Tytuł powinien miec powyżej 5 znaków';
+      formIsValid = false;
+    }
+
+    this.setState({errors: errors});
+    return formIsValid;
+  }
 
 updateCourseState(event) {
     const field = event.target.name;
@@ -39,6 +51,10 @@ redirect() {
 
 saveCourse(event){
     event.preventDefault();
+
+    if (!this.courseFormIsValid()) {
+      return;
+    }
     this.setState({saving: true});
     this.props.actions.saveCourse(this.state.course)
     .then(()=> this.redirect())
