@@ -7,9 +7,13 @@ import configureStore from './store/configureStore';
 import Routes from './routes';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import {loadCourses} from './actions/courseActions';
+import {loadAuthors} from './actions/authorsActions';
+import '../node_modules/toastr/build/toastr.min.css';
 
-const store = configureStore(); //możemy tutaj wstrzyknąć stan pocztkowy. Teraz mamy w reducerze
+ //możemy tutaj wstrzyknąć stan pocztkowy. Teraz mamy w reducerze
+const store = configureStore();
 store.dispatch(loadCourses());
+store.dispatch(loadAuthors());
 
 render(
     <Provider store={store}>
