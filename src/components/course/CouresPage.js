@@ -25,7 +25,7 @@ render(){
             <div>
                 <h1>Kursy</h1>
                 <input type="submit"
-               value="Add Course"
+               value="Dodaj kurs"
                className="btn btn-primary"
                onClick={this.redirectToAddCoursePage}/>
                 <CourseList courses={courses}/>
