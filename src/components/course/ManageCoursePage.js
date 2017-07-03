@@ -5,6 +5,7 @@ import * as courseActions from './../../actions/courseActions';
 import * as authorActions from './../../actions/authorsActions';
 import CourseForm from '../course/CourseForm';
 import toastr from 'toastr';
+import {authorsFormattedForDropdown} from '../../selectors/selectors';
 
 export class ManageCoursePage  extends React.Component{
     constructor(props,context){
@@ -65,13 +66,14 @@ saveCourse(event){
     render(){
         return(
         <div>
-            <CourseForm
-            course={this.state.course}
-            onChange={this.updateCourseState}
-            onSave={this.saveCourse}
-            allAuthors={this.state.authors}
-            errors={this.state.errors}
-            />
+           <CourseForm
+        allAuthors={this.props.authors}
+        onChange={this.updateCourseState}
+        onSave={this.saveCourse}
+        course={this.state.course}
+        errors={this.state.errors}
+        saving={this.state.saving}
+      />
         </div>);
     }
 }
@@ -99,16 +101,9 @@ function mapStateToProps(state,ownProps){
     course = getCourseById(state.courses, courseId);
      }
 
-    const authorsFormattedForDropDown = state.authors.map(author=>{
-        return{
-            value: author.id,
-            text: author.firstName+ ' '+ author.lastName
-        };
-    });
-
     return {
     course:course,
-    authors:authorsFormattedForDropDown
+    authors:authorsFormattedForDropdown(state.authors)
     };
 }
 
