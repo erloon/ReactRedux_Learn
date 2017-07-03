@@ -1,3 +1,4 @@
+/*eslint-disable import/default */
 import 'babel-polyfill';
 import React  from 'react';
 import {render} from 'react-dom';
@@ -9,6 +10,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import {loadCourses} from './actions/courseActions';
 import {loadAuthors} from './actions/authorsActions';
 import '../node_modules/toastr/build/toastr.min.css';
+import './../src/styles/styles.css';
 
  //możemy tutaj wstrzyknąć stan pocztkowy. Teraz mamy w reducerze
 const store = configureStore();
